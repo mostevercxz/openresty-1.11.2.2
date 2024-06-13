@@ -468,7 +468,7 @@ ngx_http_lua_ffi_ssl_set_ocsp_status_resp(ngx_http_request_t *r,
         return NGX_ERROR;
     }
 
-    if (ssl_conn->tlsext_status_type == -1) {
+    if (SSL_get_tlsext_status_type(ssl_conn) == -1) {
         dd("no ocsp status req from client");
         return NGX_DECLINED;
     }
@@ -490,7 +490,7 @@ ngx_http_lua_ffi_ssl_set_ocsp_status_resp(ngx_http_request_t *r,
 
     dd("set ocsp resp: resp_len=%d", (int) resp_len);
     (void) SSL_set_tlsext_status_ocsp_resp(ssl_conn, p, resp_len);
-    ssl_conn->tlsext_status_expected = 1;
+    SSL_set_tlsext_status_type(ssl_conn, 1);
 
     return NGX_OK;
 

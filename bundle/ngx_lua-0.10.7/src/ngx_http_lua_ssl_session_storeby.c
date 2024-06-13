@@ -249,8 +249,9 @@ ngx_http_lua_ssl_sess_store_handler(ngx_ssl_conn_t *ssl_conn,
     cctx->connection = c;
     cctx->request = r;
     cctx->session = sess;
-    cctx->session_id.data = sess->session_id;
-    cctx->session_id.len = sess->session_id_length;
+    unsigned int tmplen;
+    cctx->session_id.data = SSL_SESSION_get_id(sess, &tmplen);
+    cctx->session_id.len = tmplen;
     cctx->done = 0;
 
     dd("setting cctx");

@@ -2045,7 +2045,6 @@ ngx_ssl_connection_error(ngx_connection_t *c, int sslerr, ngx_err_t err,
             || n == SSL_R_ERROR_IN_RECEIVED_CIPHER_LIST              /*  151 */
             || n == SSL_R_EXCESSIVE_MESSAGE_SIZE                     /*  152 */
             || n == SSL_R_LENGTH_MISMATCH                            /*  159 */
-            || n == SSL_R_NO_CIPHERS_PASSED                          /*  182 */
             || n == SSL_R_NO_CIPHERS_SPECIFIED                       /*  183 */
             || n == SSL_R_NO_COMPRESSION_SPECIFIED                   /*  187 */
             || n == SSL_R_NO_SHARED_CIPHER                           /*  193 */

@@ -171,7 +171,7 @@ ngx_http_lua_ssl_sess_fetch_by_lua(ngx_conf_t *cf, ngx_command_t *cmd,
 
 /* cached session fetching callback to be set with SSL_CTX_sess_set_get_cb */
 ngx_ssl_session_t *
-ngx_http_lua_ssl_sess_fetch_handler(ngx_ssl_conn_t *ssl_conn, u_char *id,
+ngx_http_lua_ssl_sess_fetch_handler(ngx_ssl_conn_t *ssl_conn, const u_char *id,
     int len, int *copy)
 {
     lua_State                       *L;
