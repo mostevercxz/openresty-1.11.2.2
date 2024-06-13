@@ -1,3 +1,4 @@
 test/nginx
 build/
 Makefile
+.luarc.json
