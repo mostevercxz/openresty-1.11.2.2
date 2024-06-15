@@ -434,6 +434,7 @@ ngx_http_lua_get_flush_chain(ngx_http_request_t *r, ngx_http_lua_ctx_t *ctx)
     return cl;
 }
 
+static ngx_inline 
 const char* giant_get_table_name(lua_State *L, int index) {
     const char *name = NULL;
     if (lua_getmetatable(L, index)) {
@@ -447,6 +448,7 @@ const char* giant_get_table_name(lua_State *L, int index) {
     return name;
 }
 
+static ngx_inline 
 void giant_text_print_stack(lua_State *L, int max_elements) {
     int top = lua_gettop(L);  // Get the number of elements in the stack
     int elements_to_print = (top < max_elements) ? top : max_elements;
