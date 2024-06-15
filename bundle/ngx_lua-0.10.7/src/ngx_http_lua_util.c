@@ -313,7 +313,11 @@ ngx_http_lua_new_thread(ngx_http_request_t *r, lua_State *L, int *ref)
     base = lua_gettop(L);
 
     lua_pushlightuserdata(L, &ngx_http_lua_coroutines_key);
+    dd("----after pushing lua_pushlightuserdata");
+    giant_text_print_stack(L, 10);
     lua_rawget(L, LUA_REGISTRYINDEX);
+    dd("----after rawget");
+    giant_text_print_stack(L, 10);
 
     co = lua_newthread(L);
     dd("---lua_newthread,top=%d", lua_gettop(co));

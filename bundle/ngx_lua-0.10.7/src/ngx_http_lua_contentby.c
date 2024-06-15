@@ -34,6 +34,8 @@ ngx_http_lua_content_by_chunk(lua_State *L, ngx_http_request_t *r)
     ngx_http_lua_loc_conf_t      *llcf;
 
     dd("content by chunk");
+    dd("----start print stack");
+    giant_text_print_stack(L, 10);
 
     ctx = ngx_http_get_module_ctx(r, ngx_http_lua_module);
 
