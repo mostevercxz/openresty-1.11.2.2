@@ -338,9 +338,12 @@ ngx_http_lua_new_thread(ngx_http_request_t *r, lua_State *L, int *ref)
 
     ngx_http_lua_set_globals_table(co);
     dd("---after set_globals,top=%d", lua_gettop(co));
+    dd("---parent after set_globals,top=%d", lua_gettop(L));
     /*  }}} */
 
     *ref = luaL_ref(L, -2);
+    dd("----parent after ref");
+    giant_text_print_stack(L, 10);
 
     if (*ref == LUA_NOREF) {
         lua_settop(L, base);  /* restore main thread stack */
@@ -348,6 +351,8 @@ ngx_http_lua_new_thread(ngx_http_request_t *r, lua_State *L, int *ref)
     }
 
     lua_settop(L, base);
+    dd("----parent after settop");
+    giant_text_print_stack(L, 10);
     return co;
 }
 
