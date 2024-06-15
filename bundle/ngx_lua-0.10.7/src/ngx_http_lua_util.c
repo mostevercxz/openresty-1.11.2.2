@@ -316,7 +316,7 @@ ngx_http_lua_new_thread(ngx_http_request_t *r, lua_State *L, int *ref)
     lua_rawget(L, LUA_REGISTRYINDEX);
 
     co = lua_newthread(L);
-    printf("---lua_newthread,top=%d", lua_gettop(co));
+    dd("---lua_newthread,top=%d", lua_gettop(co));
 
     /*  {{{ inherit coroutine's globals to main thread's globals table
      *  for print() function will try to find tostring() in current
@@ -324,16 +324,16 @@ ngx_http_lua_new_thread(ngx_http_request_t *r, lua_State *L, int *ref)
      */
     /*  new globals table for coroutine */
     ngx_http_lua_create_new_globals_table(co, 0, 0);
-    printf("---after create new globals,top=%d", lua_gettop(co));
+    dd("---after create new globals,top=%d", lua_gettop(co));
 
     lua_createtable(co, 0, 1);
     ngx_http_lua_get_globals_table(co);
     lua_setfield(co, -2, "__index");
     lua_setmetatable(co, -2);
-    printf("---after lua_setmetatable,top=%d", lua_gettop(co));
+    dd("---after lua_setmetatable,top=%d", lua_gettop(co));
 
     ngx_http_lua_set_globals_table(co);
-    printf("---after set_globals,top=%d", lua_gettop(co));
+    dd("---after set_globals,top=%d", lua_gettop(co));
     /*  }}} */
 
     *ref = luaL_ref(L, -2);
