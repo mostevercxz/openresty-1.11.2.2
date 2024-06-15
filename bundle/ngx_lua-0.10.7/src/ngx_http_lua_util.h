@@ -453,47 +453,47 @@ void giant_text_print_stack(lua_State *L, int max_elements) {
     int top = lua_gettop(L);  // Get the number of elements in the stack
     int elements_to_print = (top < max_elements) ? top : max_elements;
 
-    printf("Total elements in stack: %d\n", top);
+    dd("Total elements in stack: %d\n", top);
     for (int i = 1; i <= elements_to_print; i++) {
         int type = lua_type(L, i);
         switch (type) {
             case LUA_TSTRING:
-                printf("%d: string: '%s'\n", i, lua_tostring(L, i));
+                dd("%d: string: '%s'\n", i, lua_tostring(L, i));
                 break;
             case LUA_TBOOLEAN:
-                printf("%d: boolean: %s\n", i, lua_toboolean(L, i) ? "true" : "false");
+                dd("%d: boolean: %s\n", i, lua_toboolean(L, i) ? "true" : "false");
                 break;
             case LUA_TNUMBER:
-                printf("%d: number: %g\n", i, lua_tonumber(L, i));
+                dd("%d: number: %g\n", i, lua_tonumber(L, i));
                 break;
             case LUA_TTABLE:
                 {
                     const void *addr = lua_topointer(L, i);
                     const char *name = giant_get_table_name(L, i);
                     if (name) {
-                        printf("%d: table (address: %p, name: %s)\n", i, addr, name);
+                        dd("%d: table (address: %p, name: %s)\n", i, addr, name);
                     } else {
-                        printf("%d: table (address: %p)\n", i, addr);
+                        dd("%d: table (address: %p)\n", i, addr);
                     }
                     break;
                 }
             case LUA_TFUNCTION:
-                printf("%d: function\n", i);
+                dd("%d: function\n", i);
                 break;
             case LUA_TUSERDATA:
-                printf("%d: userdata\n", i);
+                dd("%d: userdata\n", i);
                 break;
             case LUA_TLIGHTUSERDATA:
-                printf("%d: light userdata\n", i);
+                dd("%d: light userdata\n", i);
                 break;
             case LUA_TTHREAD:
-                printf("%d: thread\n", i);
+                dd("%d: thread\n", i);
                 break;
             case LUA_TNIL:
-                printf("%d: nil\n", i);
+                dd("%d: nil\n", i);
                 break;
             default:
-                printf("%d: unknown type: %s\n", i, lua_typename(L, type));
+                dd("%d: unknown type: %s\n", i, lua_typename(L, type));
                 break;
         }
     }
