@@ -62,16 +62,16 @@ ngx_http_lua_content_by_chunk(lua_State *L, ngx_http_request_t *r)
 
     /*  move code closure to new coroutine */
     lua_xmove(L, co, 1);
-    printf("after lua_xmove,top=%d", lua_gettop(co));
+    dd("after lua_xmove,top=%d", lua_gettop(co));
 
     /*  set closure's env table to new coroutine's globals table */
     ngx_http_lua_get_globals_table(co);
     lua_setfenv(co, -2);
-    printf("after lua_setfenv,top=%d", lua_gettop(co));
+    dd("after lua_setfenv,top=%d", lua_gettop(co));
 
     /*  save nginx request in coroutine globals table */
     ngx_http_lua_set_req(co, r);
-    printf("after set_req,top=%d", lua_gettop(co));
+    dd("after set_req,top=%d", lua_gettop(co));
 
     ctx->cur_co_ctx = &ctx->entry_co_ctx;
     ctx->cur_co_ctx->co = co;
@@ -120,7 +120,7 @@ ngx_http_lua_content_by_chunk(lua_State *L, ngx_http_request_t *r)
         r->read_event_handler = ngx_http_block_reading;
     }
 
-    printf("before run thread,top=%d", lua_gettop(co));
+    dd("before run thread,top=%d", lua_gettop(co));
     rc = ngx_http_lua_run_thread(L, r, ctx, 0);
 
     if (rc == NGX_ERROR || rc >= NGX_OK) {
